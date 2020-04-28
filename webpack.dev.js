@@ -9,7 +9,8 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
     historyApiFallback: true, //不跳转
     hot: true // 热更新
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  devtool: 'inline-source-map',
   mode: 'development', // 设置mode
   module: {
     rules: [

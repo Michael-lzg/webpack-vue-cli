@@ -15,6 +15,14 @@ module.exports = {
     path: path.join(__dirname, '/dist'), //打包后的文件存放的地方
     filename: 'js/[name].[hash].js', // 每次保存 hash 都变化
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, '../src')
+    },
+    // 在import这些拓展名的文件时，可以省略拓展名
+    extensions: ['*', '.js', '.json', '.vue'],
+  },
   module: {
     rules: [
       {
@@ -36,7 +44,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.BannerPlugin('版权所有，翻版必究'), // new一个插件的实例
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/index.html') // new一个这个插件的实例，并传入相关的参数
     }),
