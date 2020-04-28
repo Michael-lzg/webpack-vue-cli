@@ -10,5 +10,17 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
     hot: true // 热更新
   },
   devtool: 'source-map',
-  mode: 'development' // 设置mode
+  mode: 'development', // 设置mode
+  module: {
+    rules: [
+      {
+        test: /\.css$/,   // 正则匹配以.css结尾的文件
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+    ]
+  }
 })

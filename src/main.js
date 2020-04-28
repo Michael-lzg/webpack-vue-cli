@@ -1,10 +1,10 @@
-import './assest/css/index.css'
+import Vue from 'vue';
+import App from './App.vue'
+import router from './router'
 import './assest/css/common.less'
 
-const Hello = () => {
-  let hello = document.createElement('div');
-  hello.innerHTML = "Long time no see!11";
-  return hello;
-}
-
-document.querySelector("#root").appendChild(Hello());
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+});
