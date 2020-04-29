@@ -16,11 +16,11 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
     rules: [
       {
         test: /\.css$/,   // 正则匹配以.css结尾的文件
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
     ]
   }

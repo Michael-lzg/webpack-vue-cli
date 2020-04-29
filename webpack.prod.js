@@ -1,6 +1,8 @@
 const path = require('path') // 路径处理模块
 const merge = require('webpack-merge');
 const common = require('./webpack.base.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 引入HtmlWebpackPlugin插件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin') // 引入CleanWebpackPlugin插件
 const PurifyCssWebpack = require('purifycss-webpack') // 引入PurifyCssWebpack插件
 const glob = require('glob') // 引入glob模块,用于扫描全部html文件中所引用的css
 const MiniCssExtractPlugin = require("mini-css-extract-plugin") //引入css分离插件
@@ -30,6 +32,10 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '/index.html') // new一个这个插件的实例，并传入相关的参数
+    }),
+    new CleanWebpackPlugin(), // 所要清理的文件夹名称
     new PurifyCssWebpack({
       paths: glob.sync(path.join(__dirname, '*.html')) // 同步扫描所有html文件中所引用的css
     }),
