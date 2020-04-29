@@ -30,13 +30,46 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      {
         test: /\.(png|jpg|svg|gif)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
+              esModule: false,
               limit: 1000,  // 限制只有小于1kb的图片才转为base64，例子图片为1.47kb,所以不会被转化
               outputPath: 'images'  // 设置打包后图片存放的文件夹名称
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              // 压缩 jpeg 的配置
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // 使用 imagemin**-optipng 压缩 png，enable: false 为关闭
+              optipng: {
+                enabled: false,
+              },
+              // // 使用 imagemin-pngquant 压缩 png
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4
+              },
+              // 压缩 gif 的配置
+              gifsicle: {
+                interlaced: false,
+              },
+              // 开启 webp，会把 jpg 和 png 图片压缩为 webp 格式
+              webp: {
+                quality: 75
+              }
             }
           }
         ]

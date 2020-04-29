@@ -4,8 +4,9 @@ const common = require('./webpack.base.js');
 const PurifyCssWebpack = require('purifycss-webpack') // 引入PurifyCssWebpack插件
 const glob = require('glob') // 引入glob模块,用于扫描全部html文件中所引用的css
 const MiniCssExtractPlugin = require("mini-css-extract-plugin") //引入css分离插件
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin") // 压缩js代码
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin") // 压缩js代码
 // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin') // 多线程压缩代码
+const TerserPlugin = require('terser-webpack-plugin') // 压缩js代码
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css代码
 
 module.exports = merge(common, {
@@ -52,16 +53,21 @@ module.exports = merge(common, {
     },
     minimizer: [
       // 压缩JS
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            drop_debugger: true, // 去除debugger
-            drop_console: true // 去除console.log
-          }
-        },
-        cache: true, // 开启缓存
-        parallel: true, // 平行压缩
-        sourceMap: false // set to true if you want JS source maps
+      // new UglifyJsPlugin({
+      //   uglifyOptions: {
+      //     compress: {
+      //       drop_debugger: true, // 去除debugger
+      //       drop_console: true // 去除console.log
+      //     }
+      //   },
+      //   cache: true, // 开启缓存
+      //   parallel: true, // 平行压缩
+      //   sourceMap: false 
+      // }),
+      new TerserPlugin({
+        parallel: 4, // 开启几个进程来处理压缩，默认是 os.cpus().length - 1
+        cache: true, // 是否缓存
+        sourceMap: false
       }),
       // 压缩css
       new OptimizeCSSAssetsPlugin({})
