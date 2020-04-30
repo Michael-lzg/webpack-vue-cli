@@ -1,5 +1,6 @@
 const path = require('path') // 路径处理模块
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 const common = require('./webpack.base.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 引入HtmlWebpackPlugin插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin') // 引入CleanWebpackPlugin插件
@@ -10,6 +11,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin") //引入css分�
 // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin') // 多线程压缩代码
 const TerserPlugin = require('terser-webpack-plugin') // 压缩js代码
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css代码
+const { HashedModuleIdsPlugin } = require('webpack');
 
 module.exports = merge(common, {
   mode: 'production',// 设置mode
@@ -40,8 +42,8 @@ module.exports = merge(common, {
       paths: glob.sync(path.join(__dirname, '*.html')) // 同步扫描所有html文件中所引用的css
     }),
     new MiniCssExtractPlugin({
-      filename: "css/[name].[hash].css",
-      chunkFilename: 'css/[id].[hash].css'
+      filename: "css/[name].[contenthash:8].css",
+      chunkFilename: 'css/[id].[contenthash:8].css'
     })
   ],
   optimization: {

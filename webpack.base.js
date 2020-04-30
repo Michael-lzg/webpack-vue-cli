@@ -2,7 +2,6 @@ const path = require('path') // 路径处理模块
 const webpack = require('webpack') // 这个插件不需要安装，是基于webpack的，需要引入webpack模块
 // const ExtractTextPlugin = require('extract-text-webpack-plugin') //引入分离插件
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const devMode = process.env.NODE_ENV !== 'production'
 
 
 module.exports = {
@@ -11,7 +10,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '/dist'), //打包后的文件存放的地方
-    filename: 'js/[name].[hash].js', // 每次保存 hash 都变化
+    // filename: 'js/[name].[hash].js', // 每次保存 hash 都变化
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].js'
   },
   resolve: {
     alias: {
@@ -40,7 +41,8 @@ module.exports = {
             options: {
               esModule: false,
               limit: 1000,  // 限制只有小于1kb的图片才转为base64，例子图片为1.47kb,所以不会被转化
-              outputPath: 'images'  // 设置打包后图片存放的文件夹名称
+              outputPath: 'images', // 设置打包后图片存放的文件夹名称
+              name: '[name][hash:8].[ext]'
             }
           },
           {
@@ -74,8 +76,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [   
-    new webpack.HotModuleReplacementPlugin(), // 热更新插件
+  plugins: [
+    // new webpack.HotModuleReplacementPlugin(), // 热更新插件
     // new ExtractTextPlugin('css/index.css'), // 将css分离到/dist文件夹下的css文件夹中的index.css
     new VueLoaderPlugin()
   ]
