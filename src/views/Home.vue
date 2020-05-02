@@ -1,7 +1,6 @@
 <template>
   <div>
     首页
-    <img src="../assest/image/444.jpg" alt="">
   </div>
 </template>
 
