@@ -14,6 +14,7 @@ const { HashedModuleIdsPlugin } = require('webpack');
 
 module.exports = merge(common, {
   output: {
+    path: path.join(__dirname, '/dist'), //打包后的文件存放的地方
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].js'
   },

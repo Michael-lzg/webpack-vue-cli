@@ -10,12 +10,6 @@ module.exports = {
   entry: {
     index: path.join(__dirname, '/src/main.js'),
   },
-  output: {
-    path: path.join(__dirname, '/dist'), //打包后的文件存放的地方
-    // filename: 'js/[name].[hash].js', // 每次保存 hash 都变化
-    filename: 'js/[name].[chunkhash:8].js',
-    chunkFilename: 'js/[name].[chunkhash:8].js'
-  },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
