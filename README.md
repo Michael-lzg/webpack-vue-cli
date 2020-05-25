@@ -6,7 +6,7 @@
 - 搭建 vue 模块化开发环境
 - webpack 优化打包
 
-你需要理解的基本知识
+你需要了解的基本知识
 
 - html，css，javascript
 - ES6 语法
@@ -505,5 +505,27 @@ npm install image-webpack-loader -D
       }
     }
   ]
+}
+```
+
+#### gZip 加速优化
+
+所有现代浏览器都支持 gzip 压缩，启用 gzip 压缩可大幅缩减传输资源大小，从而缩短资源下载时间，减少首次白屏时间，提升用户体验。  
+
+gzip 对基于文本格式文件的压缩效果最好（如：CSS、JavaScript 和 HTML），在压缩较大文件时往往可实现高达 70-90% 的压缩率，对已经压缩过的资源（如：图片）进行 gzip 压缩处理，效果很不好。
+
+```js
+const CompressionPlugin = require('compression-webpack-plugin')
+configureWebpack: (config) => {
+  if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+      new CompressionPlugin({
+        // gzip压缩配置
+        test: /\.js$|\.html$|\.css/, // 匹配文件名
+        threshold: 10240, // 对超过10kb的数据进行压缩
+        deleteOriginalAssets: false, // 是否删除原文件
+      })
+    )
+  }
 }
 ```

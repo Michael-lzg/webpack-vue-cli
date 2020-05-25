@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin") //引入css分�
 // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin') // 多线程压缩代码
 const TerserPlugin = require('terser-webpack-plugin') // 压缩js代码
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin") // 压缩css代码
-const { HashedModuleIdsPlugin } = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin')// 引入gzip压缩插件
 
 module.exports = merge(common, {
   output: {
@@ -38,16 +38,18 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, '/index.html') // new一个这个插件的实例，并传入相关的参数
-    // }),
-    // new CleanWebpackPlugin(), // 所要清理的文件夹名称
     new PurifyCssWebpack({
       paths: glob.sync(path.join(__dirname, '*.html')) // 同步扫描所有html文件中所引用的css
     }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:8].css",
       chunkFilename: 'css/[id].[contenthash:8].css'
+    }),
+    new CompressionPlugin({
+      // gzip压缩配置
+      test: /\.js$|\.html$|\.css/, // 匹配文件名
+      threshold: 10240, // 对超过10kb的数据进行压缩
+      deleteOriginalAssets: false, // 是否删除原文件
     })
   ],
   optimization: {

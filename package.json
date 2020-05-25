@@ -40,5 +40,8 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
     "webpack-parallel-uglify-plugin": "^1.1.2"
+  },
+  "dependencies": {
+    "compression-webpack-plugin": "^4.0.0"
   }
 }
