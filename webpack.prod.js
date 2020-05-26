@@ -18,7 +18,7 @@ module.exports = merge(common, {
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].js'
   },
-  mode: 'production',// 设置mode
+  mode: 'production', // 设置mode
   module: {
     rules: [
       {
@@ -38,19 +38,20 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new PurifyCssWebpack({
-      paths: glob.sync(path.join(__dirname, '*.html')) // 同步扫描所有html文件中所引用的css
-    }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:8].css",
       chunkFilename: 'css/[id].[contenthash:8].css'
+    }),
+    new PurifyCssWebpack({
+      paths: glob.sync(path.join(__dirname, '*.html')) // 同步扫描所有html文件中所引用的css
     }),
     new CompressionPlugin({
       // gzip压缩配置
       test: /\.js$|\.html$|\.css/, // 匹配文件名
       threshold: 10240, // 对超过10kb的数据进行压缩
       deleteOriginalAssets: false, // 是否删除原文件
-    })
+    }),
+    
   ],
   optimization: {
     // 分离chunks
@@ -85,6 +86,6 @@ module.exports = merge(common, {
       }),
       // 压缩css
       new OptimizeCSSAssetsPlugin({})
-    ]
+    ]   
   }
 })

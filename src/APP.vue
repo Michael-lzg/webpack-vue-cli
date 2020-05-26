@@ -10,10 +10,7 @@ export default {
 }
 </script>
 
-<style>
-@import '../src/assest/css/reset.css';
-@import '../src/assest/css/common.less';
-
+<style lang="less" scoped>
 #app {
   width: 100%;
   height: 100%;

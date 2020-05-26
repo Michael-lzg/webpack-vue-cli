@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <div class="list">
-      <div class="listItem" v-for="(item, index) in list" :key="index">
-        {{ item.name }}
-      </div>
+  <div class="list">
+    <div class="listItem" v-for="(item, index) in list" :key="index">
+      {{ item.name }}
     </div>
     <footerBar></footerBar>
   </div>
@@ -20,7 +18,7 @@ export default {
         { name: '本地服务器 webpack-dev-server' },
         { name: 'HtmlWebpackPlugin 生成html' },
         { name: 'CleanWebpackPlugin 清理文件夹' },
-        { name: 'loader 及 babe l配置' },
+        { name: 'loader 及 babel 配置' },
         { name: 'HotModuleReplacementPlugin 热更新' },
         { name: 'postcss-loader 增加css前缀' },
         { name: 'vue SPA 引入及解析' },
@@ -31,7 +29,7 @@ export default {
         { name: 'terser-webpack-plugin 压缩js' },
         { name: 'splitChunks 提取公共代码' },
         { name: 'image-webpack-loader 图片压缩' },
-        { name: 'gZip 加速优化' }
+        { name: 'gZip 加速优化' },
       ],
     }
   },
@@ -39,18 +37,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.list {
-  height: 100%;
-  width: 100%;
-  .listItem {
-    width: 100%;
-    padding: 0 15px;
-    height: 45px;
-    line-height: 45px;
-    position: relative;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-  }
-}
+@import '../assest/css/home.less';
 </style>
